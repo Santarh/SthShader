@@ -1,0 +1,10 @@
+{
+  "name": "net.santarh.sth-shader",
+  "version": "0.1.0",
+  "displayName": "Sth Shader",
+  "description": "",
+  "unity": "2022.3",
+  "author": {
+    "name": "Santarh"
+  }
+}

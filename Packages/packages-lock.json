@@ -154,6 +154,12 @@
       },
       "url": "https://packages.unity.com"
     },
+    "net.santarh.sth-shader": {
+      "version": "file:net.santarh.sth-shader",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
