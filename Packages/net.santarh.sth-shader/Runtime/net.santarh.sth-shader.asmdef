@@ -1,3 +1,14 @@
 {
-	"name": "net.santarh.sth-shader"
+    "name": "net.santarh.sth-shader",
+    "rootNamespace": "SthShader",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
