@@ -58,6 +58,7 @@ namespace SthShader.Editor.Sdf
             {
                 // NOTE: SDF テクスチャに記録された Code Value はリニアである
                 textureImporter.sRGBTexture = false;
+                textureImporter.SaveAndReimport();
             }
             else
             {
