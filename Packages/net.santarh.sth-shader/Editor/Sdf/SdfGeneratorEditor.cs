@@ -1,4 +1,5 @@
-﻿using SthShader.Editor.UIToolkit;
+﻿using System.IO;
+using SthShader.Editor.UIToolkit;
 using SthShader.Sdf;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -50,8 +51,18 @@ namespace SthShader.Editor.Sdf
             var converter = new SdfConverter();
             var tex = converter.ConvertToSdfTexture(_texture, _spreadPixelCount);
             var bytes = tex.EncodeToPNG();
-            System.IO.File.WriteAllBytes(filePath, bytes);
+            File.WriteAllBytes(filePath, bytes);
             AssetDatabase.Refresh();
+            var assetPath = Path.GetRelativePath(Directory.GetCurrentDirectory(), filePath);
+            if (AssetImporter.GetAtPath(assetPath) is TextureImporter textureImporter)
+            {
+                // NOTE: SDF テクスチャに記録された Code Value はリニアである
+                textureImporter.sRGBTexture = false;
+            }
+            else
+            {
+                throw new System.InvalidOperationException("Failed to import the generated SDF texture");
+            }
         }
     }
 }
