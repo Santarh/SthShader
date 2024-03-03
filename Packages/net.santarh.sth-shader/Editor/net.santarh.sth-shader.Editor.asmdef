@@ -1,3 +1,16 @@
 {
-	"name": "net.santarh.sth-shader.Editor"
+    "name": "net.santarh.sth-shader.Editor",
+    "rootNamespace": "SthShader",
+    "references": [
+        "GUID:009ac731d7d36634bac82648128acd84"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
