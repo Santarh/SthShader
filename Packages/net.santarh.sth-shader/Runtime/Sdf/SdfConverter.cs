@@ -19,6 +19,10 @@ namespace SthShader.Sdf
             {
                 throw new ArgumentException($"{nameof(sourceBinaryTexture)} is null or not readable");
             }
+            if (spreadCount is < 1 or > 127)
+            {
+                throw new ArgumentOutOfRangeException($"{nameof(spreadCount)} is out of range");
+            }
 
             var width = sourceBinaryTexture.width;
             var height = sourceBinaryTexture.height;
