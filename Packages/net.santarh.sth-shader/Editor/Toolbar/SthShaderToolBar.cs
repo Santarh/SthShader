@@ -1,4 +1,5 @@
-﻿using SthShader.Editor.SignedDistanceField;
+﻿using SthShader.Editor.ShadowThresholdMap;
+using SthShader.Editor.SignedDistanceField;
 using UnityEditor;
 
 namespace SthShader.Editor.Toolbar
@@ -9,5 +10,8 @@ namespace SthShader.Editor.Toolbar
 
         [MenuItem(RootName + "/SDF Generator")]
         public static void ShowSignedDistanceFieldGeneratorEditorWindow() => SignedDistanceFieldGeneratorEditor.ShowWindow();
+
+        [MenuItem(RootName + "/Shadow Threshold Map Generator")]
+        public static void ShowShadowThresholdMapGeneratorWindow() => ShadowThresholdMapGeneratorEditor.ShowWindow();
     }
 }
