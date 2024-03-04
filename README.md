@@ -1,6 +1,8 @@
 # SthShader
 
-## How to Install
+## インストール方法
+動作環境は Unity 2022.3 です。
+
 Unity 上部メニューバーから `Window -> Package Manager` を選択し、 `+` ボタンを押して `Add package from git URL...` を選択します。
 
 そして入力欄に以下の URL を入力し、 `Add` ボタンを押します。
