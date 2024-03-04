@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Experimental.Rendering;
-using Object = UnityEngine.Object;
 
 namespace SthShader.SignedDistanceField
 {
@@ -77,7 +76,7 @@ namespace SthShader.SignedDistanceField
             }
             catch (Exception)
             {
-                Object.DestroyImmediate(dstTexture);
+                UnityEngine.Object.DestroyImmediate(dstTexture);
                 throw;
             }
         }
