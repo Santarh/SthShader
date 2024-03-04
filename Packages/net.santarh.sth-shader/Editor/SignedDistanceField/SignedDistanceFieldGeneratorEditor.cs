@@ -1,15 +1,15 @@
 ﻿using System;
 using System.IO;
 using SthShader.Editor.UIToolkit;
-using SthShader.Sdf;
+using SthShader.SignedDistanceField;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace SthShader.Editor.Sdf
+namespace SthShader.Editor.SignedDistanceField
 {
-    public sealed class SdfGeneratorEditor : EditorWindow
+    public sealed class SignedDistanceFieldGeneratorEditor : EditorWindow
     {
         [SerializeField] private Texture2D _texture;
         [SerializeField] private int _spreadPixelCount = 127;
@@ -19,7 +19,7 @@ namespace SthShader.Editor.Sdf
 
         public static void ShowWindow()
         {
-            var window = GetWindow<SdfGeneratorEditor>();
+            var window = GetWindow<SignedDistanceFieldGeneratorEditor>();
             window.titleContent = new GUIContent("SDF Generator");
             window.Show();
         }
@@ -97,7 +97,7 @@ namespace SthShader.Editor.Sdf
                 return;
             }
 
-            var converter = new SdfConverter();
+            var converter = new SignedDistanceFieldGenerator();
             var tex = converter.ConvertToSdfTexture(_texture, _spreadPixelCount);
             try
             {

@@ -4,9 +4,9 @@ using UnityEngine.Assertions;
 using UnityEngine.Experimental.Rendering;
 using Object = UnityEngine.Object;
 
-namespace SthShader.Sdf
+namespace SthShader.SignedDistanceField
 {
-    public sealed class SdfConverter
+    public sealed class SignedDistanceFieldGenerator
     {
         public Texture2D ConvertToSdfTexture(Texture2D sourceBinaryTexture, int spreadCount)
         {
@@ -37,7 +37,7 @@ namespace SthShader.Sdf
                 isInsideArray[idx] = IsInside(sourcePixels[idx]);
             }
 
-            var sdfResolver = new SdfResolverCpu();
+            var sdfResolver = new SignedDistanceFieldCalculatorCpu();
             var distanceArray = sdfResolver.Resolve(width, height, isInsideArray);
 
             var dstTexture = new Texture2D(width, height, GraphicsFormat.R8G8B8A8_UNorm, 1, TextureCreationFlags.None);

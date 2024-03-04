@@ -1,4 +1,4 @@
-﻿using SthShader.Editor.Sdf;
+﻿using SthShader.Editor.SignedDistanceField;
 using UnityEditor;
 
 namespace SthShader.Editor.Toolbar
@@ -8,6 +8,6 @@ namespace SthShader.Editor.Toolbar
         public const string RootName = "Sth Shader";
 
         [MenuItem(RootName + "/SDF Generator")]
-        public static void ShowSdfGeneratorWindow() => SdfGeneratorEditor.ShowWindow();
+        public static void ShowSignedDistanceFieldGeneratorEditorWindow() => SignedDistanceFieldGeneratorEditor.ShowWindow();
     }
 }
