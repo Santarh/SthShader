@@ -22,6 +22,8 @@ https://github.com/Santarh/SthShader.git?path=/Packages/net.santarh.sth-shader
 最後に `Generate` ボタンを押します。
 ファイル保存ダイアログで保存先を選び、画像ファイルを出力します。
 
+テクスチャは `Sth Shader/UnlitSdf` シェーダでプレビューすることができます。
+
 ## Shadow Threshold Map Generator
 連番白黒二値テクスチャを入力に、Shadow Threshold Map（陰影しきい値マップ）を生成します。
 
@@ -33,3 +35,5 @@ https://github.com/Santarh/SthShader.git?path=/Packages/net.santarh.sth-shader
 
 最後に `Generate` ボタンを押します。
 ファイル保存ダイアログで保存先を選び、画像ファイルを出力します。
+
+テクスチャは `Sth Shader/UnlitSdf` シェーダでプレビューすることができます。
