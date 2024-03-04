@@ -6,7 +6,7 @@ namespace SthShader.SignedDistanceField
 {
     internal sealed class SignedDistanceFieldCalculatorCpu
     {
-        public double[] Resolve(int width, int height, bool[] isInsideArray)
+        public double[] Calculate(int width, int height, bool[] isInsideArray)
         {
             if (isInsideArray.Length != width * height)
             {

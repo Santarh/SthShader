@@ -8,12 +8,12 @@ namespace SthShader.SignedDistanceField
 {
     public sealed class SignedDistanceFieldGenerator
     {
-        public Texture2D ConvertToSdfTexture(Texture2D sourceBinaryTexture, int spreadCount)
+        public Texture2D GenerateSignedDistanceFieldTexture(Texture2D sourceBinaryTexture, int spreadCount)
         {
-            return ConvertToSdfTextureWithCpu(sourceBinaryTexture, spreadCount);
+            return GenerateSignedDistanceFieldTextureWithCpu(sourceBinaryTexture, spreadCount);
         }
 
-        private static Texture2D ConvertToSdfTextureWithCpu(Texture2D sourceBinaryTexture, int spreadCount)
+        private static Texture2D GenerateSignedDistanceFieldTextureWithCpu(Texture2D sourceBinaryTexture, int spreadCount)
         {
             if (sourceBinaryTexture == null || !sourceBinaryTexture.isReadable)
             {
@@ -38,7 +38,7 @@ namespace SthShader.SignedDistanceField
             }
 
             var sdfResolver = new SignedDistanceFieldCalculatorCpu();
-            var distanceArray = sdfResolver.Resolve(width, height, isInsideArray);
+            var distanceArray = sdfResolver.Calculate(width, height, isInsideArray);
 
             var dstTexture = new Texture2D(width, height, GraphicsFormat.R8G8B8A8_UNorm, 1, TextureCreationFlags.None);
             try
