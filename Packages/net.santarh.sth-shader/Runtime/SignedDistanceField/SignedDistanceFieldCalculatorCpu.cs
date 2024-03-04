@@ -4,9 +4,9 @@ using SthShader.Collections;
 
 namespace SthShader.SignedDistanceField
 {
-    internal sealed class SignedDistanceFieldCalculatorCpu
+    internal static class SignedDistanceFieldCalculatorCpu
     {
-        public double[] Calculate(int width, int height, bool[] isInsideArray)
+        public static double[] Calculate(int width, int height, bool[] isInsideArray)
         {
             if (isInsideArray.Length != width * height)
             {
