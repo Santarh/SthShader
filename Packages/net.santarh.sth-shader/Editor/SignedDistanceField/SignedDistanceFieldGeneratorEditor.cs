@@ -97,7 +97,7 @@ namespace SthShader.Editor.SignedDistanceField
                 return;
             }
 
-            var tex = SignedDistanceFieldGenerator.GenerateTexture(_texture, _spreadPixelCount);
+            var tex = SignedDistanceFieldGenerator.Generate(_texture, _spreadPixelCount);
             try
             {
                 var bytes = tex.EncodeToPNG();
