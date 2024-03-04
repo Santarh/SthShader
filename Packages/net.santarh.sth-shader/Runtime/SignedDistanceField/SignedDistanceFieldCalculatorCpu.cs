@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using SthShader.Collections;
 
-namespace SthShader.Sdf
+namespace SthShader.SignedDistanceField
 {
-    public sealed class SdfResolverCpu
+    internal sealed class SignedDistanceFieldCalculatorCpu
     {
         public double[] Resolve(int width, int height, bool[] isInsideArray)
         {
