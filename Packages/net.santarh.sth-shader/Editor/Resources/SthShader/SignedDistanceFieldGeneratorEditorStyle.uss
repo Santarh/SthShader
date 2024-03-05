@@ -1,5 +1,32 @@
 .sth-sdf-root {
     --sth-sdf-element-padding: 8px;
-    --sth-sdf-field-padding: 32px;
     padding: var(--sth-sdf-element-padding);
+    display: flex;
+    flex-direction: column;
+}
+
+.sth-sdf-settings {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-wrap: nowrap;
+}
+
+.sth-sdf-spacer {
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.sth-sdf-fix-texture-button {
+}
+
+.sth-sdf-advanced-settings-foldout {
+    padding-top: var(--sth-sdf-element-padding);
+}
+
+.sth-sdf-advanced-settings-foldout #unity-content {
+    padding-top: var(--sth-sdf-element-padding);
+}
+
+.sth-sdf-generate-button {
+    height: 60px;
 }
