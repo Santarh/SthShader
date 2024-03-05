@@ -16,7 +16,7 @@
     flex-wrap: nowrap;
 }
 
-.sth-field-labeled-flex-container {
+.sth-field-labeled-content {
     padding: var(--sth-field-labeled-flex-container-padding);
 }
 
