@@ -35,7 +35,7 @@ namespace SthShader.ShadowThresholdMap
             var distanceArrays = new double[textures.Count][];
             for (var idx = 0; idx < textures.Count; ++idx)
             {
-                insideArrays[idx] = SignedDistanceFieldGenerator.GenerateInsideArrayFromInputTexture(textures[idx], 0);
+                insideArrays[idx] = SignedDistanceFieldGenerator.GenerateInsideArrayFromInputTexture(textures[idx], 0, 0, 0);
             }
             Parallel.ForEach(textures, (texture, _, index) =>
             {

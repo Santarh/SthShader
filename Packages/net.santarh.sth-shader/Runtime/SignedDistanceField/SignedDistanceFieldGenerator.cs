@@ -7,17 +7,17 @@ namespace SthShader.SignedDistanceField
 {
     public static class SignedDistanceFieldGenerator
     {
-        public static Texture2D Generate(Texture2D sourceBinaryTexture, int spreadCount = 127)
+        public static Texture2D Generate(Texture2D sourceBinaryTexture, int spreadCount = 127, float thresholdRed = 0f, float thresholdGreen = 0f, float thresholdBlue = 0f)
         {
             var width = sourceBinaryTexture.width;
             var height = sourceBinaryTexture.height;
 
-            var isInsideArray = GenerateInsideArrayFromInputTexture(sourceBinaryTexture, 0);
+            var isInsideArray = GenerateInsideArrayFromInputTexture(sourceBinaryTexture, thresholdRed, thresholdGreen, thresholdBlue);
             var distanceArray = SignedDistanceFieldCalculatorCpu.Calculate(width, height, isInsideArray);
             return GenerateOutputTextureFromDistanceArray(width, height, distanceArray, spreadCount);
         }
 
-        internal static bool[] GenerateInsideArrayFromInputTexture(Texture2D texture, byte redThreshold)
+        internal static bool[] GenerateInsideArrayFromInputTexture(Texture2D texture, float thresholdRed, float thresholdGreen, float thresholdBlue)
         {
             if (texture == null || !texture.isReadable)
             {
@@ -27,6 +27,10 @@ namespace SthShader.SignedDistanceField
             var width = texture.width;
             var height = texture.height;
 
+            var thresholdRedByte = (byte)(thresholdRed * 255);
+            var thresholdGreenByte = (byte)(thresholdGreen * 255);
+            var thresholdBlueByte = (byte)(thresholdBlue * 255);
+
             // NOTE: 入力テクスチャのフォーマットは不定のため GetPixelData ではなく GetPixels32 を使用して一意に変換する
             var sourcePixels = texture.GetPixels32(miplevel: 0);
             Assert.AreEqual(width * height, sourcePixels.Length);
@@ -34,7 +38,9 @@ namespace SthShader.SignedDistanceField
             var isInsideArray = new bool[width * height];
             for (var idx = 0; idx < sourcePixels.Length; ++idx)
             {
-                isInsideArray[idx] = sourcePixels[idx].r > redThreshold;
+                isInsideArray[idx] = sourcePixels[idx].r > thresholdRedByte ||
+                                     sourcePixels[idx].g > thresholdGreenByte ||
+                                     sourcePixels[idx].b > thresholdBlueByte;
             }
 
             return isInsideArray;
