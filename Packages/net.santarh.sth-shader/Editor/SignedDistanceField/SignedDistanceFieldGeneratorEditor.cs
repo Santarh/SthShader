@@ -24,6 +24,10 @@ namespace SthShader.Editor.SignedDistanceField
         {
             var window = GetWindow<SignedDistanceFieldGeneratorEditor>();
             window.titleContent = new GUIContent("SDF Generator");
+            var pos = window.position;
+            pos.width = 420;
+            pos.height = 420;
+            window.position = pos;
             window.Show();
         }
 
@@ -40,13 +44,22 @@ namespace SthShader.Editor.SignedDistanceField
             var thresholdBlueProperty = serializedObject.FindProperty(nameof(_thresholdBlue));
             var advancedSettingsFoldoutProperty = serializedObject.FindProperty(nameof(_advancedSettingsFoldoutValue));
 
+            var settingsElement = new ScrollView(ScrollViewMode.VerticalAndHorizontal);
+            settingsElement.AddToClassList("sth-sdf-settings");
+            rootVisualElement.Add(settingsElement);
+
             var textureField = new TextureObjectFieldWithPreview("Input Texture");
             textureField.BindProperty(textureProperty);
-            rootVisualElement.Add(textureField);
+            settingsElement.Add(textureField);
+
+            _fixTextureImporterSettingButton = new Button(FixTextureImporterSetting) { text = "Fix Texture Importer Setting" };
+            _fixTextureImporterSettingButton.AddToClassList("sth-sdf-fix-texture-button");
+            settingsElement.Add(_fixTextureImporterSettingButton);
 
             var advancedSettingsFoldout = new Foldout { text = "Advanced Settings" };
             advancedSettingsFoldout.BindProperty(advancedSettingsFoldoutProperty);
-            rootVisualElement.Add(advancedSettingsFoldout);
+            advancedSettingsFoldout.AddToClassList("sth-sdf-advanced-settings-foldout");
+            settingsElement.Add(advancedSettingsFoldout);
 
             var thresholdRedField = new FloatFieldWithSlider("Inner Mask Threshold [Red]", 0, 1);
             thresholdRedField.BindProperty(thresholdRedProperty);
@@ -60,10 +73,12 @@ namespace SthShader.Editor.SignedDistanceField
             thresholdBlueField.BindProperty(thresholdBlueProperty);
             advancedSettingsFoldout.Add(thresholdBlueField);
 
-            _fixTextureImporterSettingButton = new Button(FixTextureImporterSetting) { text = "Fix Texture Importer Setting" };
-            rootVisualElement.Add(_fixTextureImporterSettingButton);
+            var spacer = new VisualElement();
+            spacer.AddToClassList("sth-sdf-spacer");
+            rootVisualElement.Add(spacer);
 
             _generateButton = new Button(Generate) { text = "Generate" };
+            _generateButton.AddToClassList("sth-sdf-generate-button");
             textureField.RegisterValueChangedCallback(ev => UpdateUiEnabled());
             rootVisualElement.Add(_generateButton);
         }
