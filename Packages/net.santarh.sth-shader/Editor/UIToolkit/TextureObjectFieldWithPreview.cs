@@ -54,7 +54,7 @@ namespace SthShader.Editor.UIToolkit
             flexContainer.AddToClassList("sth-field-flex-container");
             if (useLabel)
             {
-                flexContainer.AddToClassList("sth-field-labeled-flex-container");
+                flexContainer.AddToClassList("sth-field-labeled-content");
             }
             Add(flexContainer);
             var flexItem0 = new VisualElement();
