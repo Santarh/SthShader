@@ -1,0 +1,32 @@
+.sth-field-root {
+    --sth-field-labeled-flex-container-padding: 0 0 8px 32px;
+    --sth-field-label-padding: 0 0 8px 0;
+}
+
+.sth-field-label {
+    -unity-font-style: bold;
+    padding: var(--sth-field-label-padding);
+}
+
+.sth-field-flex-container {
+    --sth-field-basis-width: 64px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.sth-field-labeled-flex-container {
+    padding: var(--sth-field-labeled-flex-container-padding);
+}
+
+.sth-field-flex-container > .sth-field-flex-item-0 {
+    flex-basis: var(--sth-field-basis-width);
+    flex-grow: 1;
+}
+
+.sth-field-flex-container > .sth-field-flex-item-1 {
+    flex-basis: var(--sth-field-basis-width);
+    flex-grow: 0;
+    flex-shrink: 0;
+}

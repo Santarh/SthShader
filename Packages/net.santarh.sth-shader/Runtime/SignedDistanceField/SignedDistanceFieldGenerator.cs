@@ -7,7 +7,7 @@ namespace SthShader.SignedDistanceField
 {
     public static class SignedDistanceFieldGenerator
     {
-        public static Texture2D Generate(Texture2D sourceBinaryTexture, int spreadCount)
+        public static Texture2D Generate(Texture2D sourceBinaryTexture, int spreadCount = 127)
         {
             var width = sourceBinaryTexture.width;
             var height = sourceBinaryTexture.height;

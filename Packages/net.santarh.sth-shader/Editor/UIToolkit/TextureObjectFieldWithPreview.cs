@@ -34,18 +34,34 @@ namespace SthShader.Editor.UIToolkit
             }
         }
 
-        public TextureObjectFieldWithPreview()
+        public TextureObjectFieldWithPreview() : this(string.Empty) { }
+
+        public TextureObjectFieldWithPreview(string label)
         {
+            styleSheets.Add(Resources.Load<StyleSheet>("SthShader/SthFieldStyle"));
             styleSheets.Add(Resources.Load<StyleSheet>("SthShader/TextureObjectFieldWithPreviewStyle"));
+            AddToClassList("sth-field-root");
+
+            var useLabel = !string.IsNullOrEmpty(label);
+            if (useLabel)
+            {
+                var labelElement = new Label(label);
+                labelElement.AddToClassList("sth-field-label");
+                Add(labelElement);
+            }
 
             var flexContainer = new VisualElement();
-            flexContainer.AddToClassList("flex-container");
+            flexContainer.AddToClassList("sth-field-flex-container");
+            if (useLabel)
+            {
+                flexContainer.AddToClassList("sth-field-labeled-flex-container");
+            }
             Add(flexContainer);
             var flexItem0 = new VisualElement();
-            flexItem0.AddToClassList("flex-item-0");
+            flexItem0.AddToClassList("sth-field-flex-item-0");
             flexContainer.Add(flexItem0);
             var flexItem1 = new VisualElement();
-            flexItem1.AddToClassList("flex-item-1");
+            flexItem1.AddToClassList("sth-field-flex-item-1");
             flexContainer.Add(flexItem1);
 
             _image = new Image();
