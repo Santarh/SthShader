@@ -12,7 +12,7 @@ namespace SthShader.Editor.SignedDistanceField
     public sealed class SignedDistanceFieldGeneratorEditor : EditorWindow
     {
         [SerializeField] private Texture2D _texture;
-        [SerializeField] private int _spreadPixelCount = 127;
+        [SerializeField] private float _threshold = 0f;
 
         private Button _fixTextureImporterSettingButton;
         private Button _generateButton;
@@ -26,19 +26,20 @@ namespace SthShader.Editor.SignedDistanceField
 
         public void CreateGUI()
         {
+            rootVisualElement.styleSheets.Add(Resources.Load<StyleSheet>("SthShader/SignedDistanceFieldGeneratorEditorStyle"));
+            rootVisualElement.AddToClassList("sth-sdf-root");
+
             var serializedObject = new SerializedObject(this);
             var textureProperty = serializedObject.FindProperty(nameof(_texture));
-            var spreadPixelCountProperty = serializedObject.FindProperty(nameof(_spreadPixelCount));
+            var thresholdProperty = serializedObject.FindProperty(nameof(_threshold));
 
-            rootVisualElement.Add(new Label("Input Texture"));
-
-            var textureField = new TextureObjectFieldWithPreview();
+            var textureField = new TextureObjectFieldWithPreview("Input Texture");
             textureField.BindProperty(textureProperty);
             rootVisualElement.Add(textureField);
 
-            var spreadPixelCountField = new IntegerField(label: spreadPixelCountProperty.displayName);
-            spreadPixelCountField.BindProperty(spreadPixelCountProperty);
-            rootVisualElement.Add(spreadPixelCountField);
+            var thresholdField = new FloatFieldWithSlider("Threshold", 0, 1);
+            thresholdField.BindProperty(thresholdProperty);
+            rootVisualElement.Add(thresholdField);
 
             _fixTextureImporterSettingButton = new Button(FixTextureImporterSetting) { text = "Fix Texture Importer Setting" };
             _generateButton = new Button(Generate) { text = "Generate" };
@@ -97,7 +98,7 @@ namespace SthShader.Editor.SignedDistanceField
                 return;
             }
 
-            var tex = SignedDistanceFieldGenerator.Generate(_texture, _spreadPixelCount);
+            var tex = SignedDistanceFieldGenerator.Generate(_texture);
             try
             {
                 var bytes = tex.EncodeToPNG();

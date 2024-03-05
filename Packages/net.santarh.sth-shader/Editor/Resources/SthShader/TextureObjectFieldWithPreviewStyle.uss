@@ -1,34 +1,13 @@
 TextureObjectFieldWithPreview {
-    --image-width: 64px;
-    --indent: 8px;
+
 }
 
-TextureObjectFieldWithPreview > Label {
-    -unity-font-style: bold;
+TextureObjectFieldWithPreview .sth-field-flex-item-1 {
+    width: var(--sth-field-basis-width);
+    height: var(--sth-field-basis-width);
 }
 
-TextureObjectFieldWithPreview > .flex-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    height: var(--image-width);
-}
-
-TextureObjectFieldWithPreview > .flex-container > .flex-item-0 {
-    flex-basis: var(--image-width);
-    flex-grow: 1;
-}
-
-TextureObjectFieldWithPreview > .flex-container > .flex-item-1 {
-    flex-basis: var(--image-width);
-    flex-grow: 0;
-    height: var(--image-width);
-}
-
-TextureObjectFieldWithPreview ObjectField {
-}
-
-TextureObjectFieldWithPreview .flex-item-1 Image {
+TextureObjectFieldWithPreview Image {
     width: 100%;
     height: 100%;
     background-color: #202020;

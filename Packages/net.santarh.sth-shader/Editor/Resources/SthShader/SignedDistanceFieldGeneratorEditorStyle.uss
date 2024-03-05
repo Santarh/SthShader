@@ -1,0 +1,5 @@
+.sth-sdf-root {
+    --sth-sdf-element-padding: 8px;
+    --sth-sdf-field-padding: 32px;
+    padding: var(--sth-sdf-element-padding);
+}
