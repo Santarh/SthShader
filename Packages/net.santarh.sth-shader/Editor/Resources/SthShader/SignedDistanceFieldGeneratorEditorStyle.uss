@@ -1,32 +1,34 @@
-.sth-sdf-root {
+#sth-sdf-root {
     --sth-sdf-element-padding: 8px;
+    width: 100%;
+    height: 100%;
     padding: var(--sth-sdf-element-padding);
     display: flex;
     flex-direction: column;
 }
 
-.sth-sdf-settings {
+#sth-sdf-settings {
     flex-grow: 0;
     flex-shrink: 1;
     flex-wrap: nowrap;
 }
 
-.sth-sdf-spacer {
+#sth-sdf-spacer {
     flex-grow: 1;
     flex-shrink: 1;
 }
 
-.sth-sdf-fix-texture-button {
+#sth-sdf-fix-texture-button {
 }
 
-.sth-sdf-advanced-settings-foldout {
+#sth-sdf-advanced-settings-foldout {
     padding-top: var(--sth-sdf-element-padding);
 }
 
-.sth-sdf-advanced-settings-foldout #unity-content {
+#sth-sdf-advanced-settings-foldout #unity-content {
     padding-top: var(--sth-sdf-element-padding);
 }
 
-.sth-sdf-generate-button {
+#sth-sdf-generate-button {
     height: 60px;
 }

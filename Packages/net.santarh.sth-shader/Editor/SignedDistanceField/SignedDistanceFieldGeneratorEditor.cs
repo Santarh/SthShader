@@ -33,9 +33,7 @@ namespace SthShader.Editor.SignedDistanceField
 
         public void CreateGUI()
         {
-            rootVisualElement.styleSheets.Add(Resources.Load<StyleSheet>("SthShader/SthFieldStyle"));
-            rootVisualElement.styleSheets.Add(Resources.Load<StyleSheet>("SthShader/SignedDistanceFieldGeneratorEditorStyle"));
-            rootVisualElement.AddToClassList("sth-sdf-root");
+            rootVisualElement.Add(Uxml.GenerateTree());
 
             var serializedObject = new SerializedObject(this);
             var textureProperty = serializedObject.FindProperty(nameof(_texture));
@@ -44,43 +42,17 @@ namespace SthShader.Editor.SignedDistanceField
             var thresholdBlueProperty = serializedObject.FindProperty(nameof(_thresholdBlue));
             var advancedSettingsFoldoutProperty = serializedObject.FindProperty(nameof(_advancedSettingsFoldoutValue));
 
-            var settingsElement = new ScrollView(ScrollViewMode.VerticalAndHorizontal);
-            settingsElement.AddToClassList("sth-sdf-settings");
-            rootVisualElement.Add(settingsElement);
-
-            var textureField = new TextureObjectFieldWithPreview("Input Texture");
+            _fixTextureImporterSettingButton = rootVisualElement.Q<Button>("sth-sdf-fix-texture-button");
+            _fixTextureImporterSettingButton.clickable = new Clickable(FixTextureImporterSetting);
+            _generateButton = rootVisualElement.Q<Button>("sth-sdf-generate-button");
+            _generateButton.clickable = new Clickable(Generate);
+            var textureField = rootVisualElement.Q<TextureObjectFieldWithPreview>("sth-sdf-input-texture");
             textureField.BindProperty(textureProperty);
-            settingsElement.Add(textureField);
-
-            _fixTextureImporterSettingButton = new Button(FixTextureImporterSetting) { text = "Fix Texture Importer Setting" };
-            _fixTextureImporterSettingButton.AddToClassList("sth-sdf-fix-texture-button");
-            settingsElement.Add(_fixTextureImporterSettingButton);
-
-            var advancedSettingsFoldout = new Foldout { text = "Advanced Settings" };
-            advancedSettingsFoldout.BindProperty(advancedSettingsFoldoutProperty);
-            advancedSettingsFoldout.AddToClassList("sth-sdf-advanced-settings-foldout");
-            settingsElement.Add(advancedSettingsFoldout);
-
-            var thresholdRedField = new FloatFieldWithSlider("Inner Mask Threshold [Red]", 0, 1);
-            thresholdRedField.BindProperty(thresholdRedProperty);
-            advancedSettingsFoldout.Add(thresholdRedField);
-
-            var thresholdGreenField = new FloatFieldWithSlider("Inner Mask Threshold [Green]", 0, 1);
-            thresholdGreenField.BindProperty(thresholdGreenProperty);
-            advancedSettingsFoldout.Add(thresholdGreenField);
-
-            var thresholdBlueField = new FloatFieldWithSlider("Inner Mask Threshold [Blue]", 0, 1);
-            thresholdBlueField.BindProperty(thresholdBlueProperty);
-            advancedSettingsFoldout.Add(thresholdBlueField);
-
-            var spacer = new VisualElement();
-            spacer.AddToClassList("sth-sdf-spacer");
-            rootVisualElement.Add(spacer);
-
-            _generateButton = new Button(Generate) { text = "Generate" };
-            _generateButton.AddToClassList("sth-sdf-generate-button");
             textureField.RegisterValueChangedCallback(ev => UpdateUiEnabled());
-            rootVisualElement.Add(_generateButton);
+            rootVisualElement.Q<BindableElement>("sth-sdf-advanced-settings-foldout").BindProperty(advancedSettingsFoldoutProperty);
+            rootVisualElement.Q<BindableElement>("sth-sdf-mask-threshold-red").BindProperty(thresholdRedProperty);
+            rootVisualElement.Q<BindableElement>("sth-sdf-mask-threshold-green").BindProperty(thresholdGreenProperty);
+            rootVisualElement.Q<BindableElement>("sth-sdf-mask-threshold-blue").BindProperty(thresholdBlueProperty);
         }
 
         private void Update()
@@ -160,6 +132,64 @@ namespace SthShader.Editor.SignedDistanceField
             {
                 DestroyImmediate(tex);
             }
+        }
+
+        private static class Uxml
+        {
+            public static VisualElement GenerateTree() => new VisualElement()
+                {
+                    name = "sth-sdf-root",
+                }
+                .WithStyleSheet(Resources.Load<StyleSheet>("SthShader/SthFieldStyle"))
+                .WithStyleSheet(Resources.Load<StyleSheet>("SthShader/SignedDistanceFieldGeneratorEditorStyle"))
+                .WithChild(new ScrollView(ScrollViewMode.VerticalAndHorizontal)
+                    {
+                        name = "sth-sdf-settings",
+                    }
+                    .WithChild(new TextureObjectFieldWithPreview("Input Texture")
+                        {
+                            name = "sth-sdf-input-texture",
+                        }
+                    )
+                    .WithChild(new Button()
+                        {
+                            name = "sth-sdf-fix-texture-button",
+                            text = "Fix Texture Importer Setting",
+                        }
+                    )
+                    .WithChild(new Foldout()
+                        {
+                            name = "sth-sdf-advanced-settings-foldout",
+                            text = "Advanced Settings",
+                        }
+                        .WithChild(new FloatFieldWithSlider("Inner Mask Threshold [Red]", 0, 1)
+                            {
+                                name = "sth-sdf-mask-threshold-red",
+                            }
+                        )
+                        .WithChild(new FloatFieldWithSlider("Inner Mask Threshold [Green]", 0, 1)
+                            {
+                                name = "sth-sdf-mask-threshold-green",
+                            }
+                        )
+                        .WithChild(new FloatFieldWithSlider("Inner Mask Threshold [Blue]", 0, 1)
+                            {
+                                name = "sth-sdf-mask-threshold-blue",
+                            }
+                        )
+                    )
+                )
+                .WithChild(new VisualElement()
+                    {
+                        name = "sth-sdf-spacer"
+                    }
+                )
+                .WithChild(new Button()
+                    {
+                        name = "sth-sdf-generate-button",
+                        text = "Generate",
+                    }
+                );
         }
     }
 }
